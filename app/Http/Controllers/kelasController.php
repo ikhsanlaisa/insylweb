@@ -123,6 +123,11 @@ class kelasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kelas = tb_kelas::find($id);
+        $result = $kelas->delete();
+        if ($result){
+            return redirect('/datakelas')->with(['message' => 'Berhasil Hapus Kelas']);
+        }
+        return redirect('/datakelas')->with(['message' => 'Gagal Hapus Kelas']);
     }
 }

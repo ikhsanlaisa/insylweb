@@ -70,7 +70,7 @@
                 </li>
 
                 <li class="active">
-                    <a href="#"> <i class="menu-icon fa fa-phone-square"></i>Management Kontak</a>
+                    <a href="/datakontak"> <i class="menu-icon fa fa-phone-square"></i>Management Kontak</a>
                 </li>
 
                 <li class="active">

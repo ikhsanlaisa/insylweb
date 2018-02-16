@@ -16,36 +16,40 @@
                                 <p>{{ Session::get('message') }}</p>
                             </div>
                         @endif
-                        @if(!empty($kelas))
+                        @if(!empty($kontak))
                             <div class="card-body">
                                 <table id="bootstrap-data-table" class="table table-striped table-bordered">
                                     <thead>
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Kelas</th>
-                                        <th>Foto </th>
+                                        <th>email </th>
+                                        <th>No. Telepon</th>
+                                        <th>Foto</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php $i = 1?>
-                                    @foreach($kelas as $k)
+                                    @foreach($kontak as $k)
                                         <tr>
                                             <td><center>{{$i++}}</center></td>
-                                            <td><center>{{$k->nama_kelas}}</center></td>
+                                            <td><center>{{$k->nama}}</center></td>
+                                            <td><center>{{$k->email}}</center></td>
+                                            <td><center>{{$k->no_telp}}</center></td>
                                             <td><center><img src="images/kelas/{{ $k->foto }}" class="img-thumbnail" width="100" height="100"/></center></td>
                                             <td>
                                                 <center>
-                                                <form action="/deletedatakelas/{{$k->id}}" method="post" >
-                                                    {{csrf_field()}}
-                                                    <input type="hidden" name="_method" value="delete">
-                                                    <button type="button" class="btn btn-inline btn-success btn-sm ladda-button"
-                                                            onclick="showModal({{ $k->id }})" title="edit" name="button"
-                                                            data-toggle="modal" data-target="#modaledit"><span
-                                                                class="fa fa-edit"></span></button>
+                                                    <form action="/deletedatakelas/{{$k->id}}" method="post" >
+                                                        {{csrf_field()}}
+                                                        <input type="hidden" name="_method" value="delete">
+                                                        <button type="button" class="btn btn-inline btn-success btn-sm ladda-button"
+                                                                onclick="showModal({{ $k->id }})" title="edit" name="button"
+                                                                data-toggle="modal" data-target="#modaledit"><span
+                                                                    class="fa fa-edit"></span></button>
 
-                                                    <button type="delete" name="delete" id="btnhapus" value="delete" class="btn btn-inline btn-danger btn-sm ladda-button" onclick="return confirm('Are you sure to delete this data');"><i class="fa fa-trash"></i></button>
-                                                </form>
+                                                        <button type="delete" name="delete" id="btnhapus" value="delete" class="btn btn-inline btn-danger btn-sm ladda-button" onclick="return confirm('Are you sure to delete this data');"><i class="fa fa-trash"></i></button>
+                                                    </form>
                                                 </center>
                                             </td>
                                         </tr>

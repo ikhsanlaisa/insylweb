@@ -52,6 +52,9 @@ Route::get('/register', 'adminController@create');
 Route::post('/postregister', 'adminController@store');
 
 //----------------datakelas----------------//
+Route::get('/datakontak', 'kontakController@index');
+
+//----------------datakelas----------------//
 Route::get('/datakelas', 'kelasController@index');
 
 Route::get('/tambah_kelas', 'kelasController@create');
@@ -61,3 +64,5 @@ Route::post('/postkelas', 'kelasController@store');
 Route::get('/detaildatakelas/{id}', 'kelasController@show');
 
 Route::put('/updatedatakelas/{id}', 'kelasController@update');
+
+Route::delete('/deletedatakelas/{id}', 'kelasController@destroy');
