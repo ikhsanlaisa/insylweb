@@ -17,6 +17,7 @@ class CreateTbKelasTable extends Migration
             $table->increments('id');
             $table->string('nama_kelas');
             $table->string('foto');
+            $table->string('point')->nullable();
             $table->timestamps();
         });
     }

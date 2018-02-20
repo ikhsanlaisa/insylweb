@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Input;
 
 class kelasController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -99,14 +103,15 @@ class kelasController extends Controller
         $kelas = tb_kelas::find($id);
 
         $filepath = 'images/kelas';
+        if ($request->input('foto')) {
+            $foto = $request->input('foto');
 
-        $foto = $request->input('foto');
-        $fotos = $foto->getClientOriginalName();
-        $foto->move($filepath, $fotos);
+            $fotos = $foto->getClientOriginalName();
+            $foto->move($filepath, $fotos);
 
-
+            $kelas->foto = $fotos;
+        }
         $kelas->nama_kelas = $request->input('kelas');
-        $kelas->foto = $fotos;
         $result = $kelas->save();
 
         if ($result) {

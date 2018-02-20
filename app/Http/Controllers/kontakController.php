@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class kontakController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +29,7 @@ class kontakController extends Controller
      */
     public function create()
     {
-        return view('')
+        return view('admin.tambah_kontak');
     }
 
     /**
@@ -36,7 +40,23 @@ class kontakController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $filepath = 'images/kontak/';
+
+        $foto = $request->file('foto');
+        $fotos = $foto->getClientOriginalName();
+        $foto->move($filepath, $fotos);
+
+        $kontak = new tb_kontak();
+        $kontak->nama = $request->input('nama');
+        $kontak->email = $request->input('email');
+        $kontak->no_telp = $request->input('telp');
+        $kontak->foto = $fotos;
+        $result = $kontak->save();
+            if ($result) {
+                return redirect('/tambah_kontak')->with(['message' => 'Berhasil Tambah Kontak']);
+            }
+            return redirect('/tambah_kontak')->with(['message' => 'Gagal Tambah Kontak']);
+
     }
 
     /**
@@ -47,7 +67,8 @@ class kontakController extends Controller
      */
     public function show($id)
     {
-        //
+        $kontak = tb_kontak::where('id', $id)->get();
+        return json_encode($kontak);
     }
 
     /**
@@ -58,7 +79,7 @@ class kontakController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -70,7 +91,26 @@ class kontakController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $kontak = tb_kontak::find($id);
+        $filepath = 'images/kontak/';
+
+        if ($request->input('foto')) {
+            $foto = $request->file('foto');
+            $fotos = $foto->getClientOriginalName();
+            $foto->move($filepath, $fotos);
+
+            $kontak->foto = $fotos;
+        }
+        $kontak->nama = $request->input('nama');
+        $kontak->email = $request->input('email');
+        $kontak->no_telp = $request->input('telp');
+
+        $result = $kontak->save();
+        if ($result) {
+            return redirect('/datakontak')->with(['message' => 'Berhasil Tambah Kontak']);
+        }
+        return redirect('/datakontak')->with(['message' => 'Gagal Tambah Kontak']);
+
     }
 
     /**

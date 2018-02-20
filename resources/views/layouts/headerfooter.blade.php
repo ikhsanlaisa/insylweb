@@ -74,12 +74,16 @@
                 </li>
 
                 <li class="active">
-                    <a href="#"> <i class="menu-icon fa fa-sitemap"></i>Score dan Klasemen</a>
+                    <a href="/jadwal"> <i class="menu-icon fa fa-calendar-o"></i>Management Jadwal</a>
                 </li>
 
                 <li class="active">
-                    <a href="#"> <i class="menu-icon fa fa-wrench"></i>Pengaturan</a>
+                    <a href="/kontak"> <i class="menu-icon fa fa-sitemap"></i>Score dan Klasemen</a>
                 </li>
+
+                {{--<li class="active">--}}
+                    {{--<a href="#"> <i class="menu-icon fa fa-wrench"></i>Pengaturan</a>--}}
+                {{--</li>--}}
 
             </ul>
         </div><!-- /.navbar-collapse -->

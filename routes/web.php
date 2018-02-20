@@ -47,12 +47,23 @@ Route::put('/updatedatalomba/{id}', 'lombaController@update');
 Route::delete('/deletedatalomba/{id}', 'lombaController@destroy');
 
 //----------------register----------------//
+Route::get('/jadwal', 'jadwalController@index');
+
+//----------------register----------------//
 Route::get('/register', 'adminController@create');
 
 Route::post('/postregister', 'adminController@store');
 
 //----------------datakelas----------------//
 Route::get('/datakontak', 'kontakController@index');
+
+Route::get('/tambah_kontak', 'kontakController@create');
+
+Route::post('/postkontak', 'kontakController@store');
+
+Route::get('/detaildatakontak/{id}', 'kontakController@show');
+
+Route::put('/updatedatakontak/{id}', 'kontakController@update');
 
 //----------------datakelas----------------//
 Route::get('/datakelas', 'kelasController@index');

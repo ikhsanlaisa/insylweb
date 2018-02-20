@@ -22,8 +22,8 @@
                                     <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama Kelas</th>
                                         <th>Foto </th>
+                                        <th>Nama Kelas</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -32,8 +32,8 @@
                                     @foreach($kelas as $k)
                                         <tr>
                                             <td><center>{{$i++}}</center></td>
-                                            <td><center>{{$k->nama_kelas}}</center></td>
                                             <td><center><img src="images/kelas/{{ $k->foto }}" class="img-thumbnail" width="100" height="100"/></center></td>
+                                            <td><center>{{$k->nama_kelas}}</center></td>
                                             <td>
                                                 <center>
                                                 <form action="/deletedatakelas/{{$k->id}}" method="post" >

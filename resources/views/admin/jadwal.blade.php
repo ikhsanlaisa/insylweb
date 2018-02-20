@@ -7,8 +7,8 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <a type="submit" href="/tambah_kontak" class="btn" style="border-radius: 20px">
-                                <i class="fa fa-dot-circle-o"></i> Tambah Kontak
+                            <a type="submit" href="/tambah_kelas" class="btn" style="border-radius: 20px">
+                                <i class="fa fa-dot-circle-o"></i> Tambah Kelas
                             </a>
                         </div>
                         @if(Session::has('message'))
@@ -16,35 +16,31 @@
                                 <p>{{ Session::get('message') }}</p>
                             </div>
                         @endif
-                        @if(!empty($kontak))
+                        @if(!empty($jadwal))
                             <div class="card-body">
                                 <table id="bootstrap-data-table" class="table table-striped table-bordered">
                                     <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Foto</th>
+                                        <th>Foto </th>
                                         <th>Nama Kelas</th>
-                                        <th>email </th>
-                                        <th>No. Telepon</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php $i = 1?>
-                                    @foreach($kontak as $k)
+                                    @foreach($jadwal as $j)
                                         <tr>
                                             <td><center>{{$i++}}</center></td>
-                                            <td><center><img src="images/kontak/{{ $k->foto }}" class="img-thumbnail" width="100" height="100"/></center></td>
-                                            <td><center>{{$k->nama}}</center></td>
-                                            <td><center>{{$k->email}}</center></td>
-                                            <td><center>{{$k->no_telp}}</center></td>
+                                            <td><center><img src="images/kelas/{{ $j->foto }}" class="img-thumbnail" width="100" height="100"/></center></td>
+                                            <td><center>{{$k->nama_kelas}}</center></td>
                                             <td>
                                                 <center>
-                                                    <form action="/deletedatakelas/{{$k->id}}" method="post" >
+                                                    <form action="/deletedatakelas/{{$j->id}}" method="post" >
                                                         {{csrf_field()}}
                                                         <input type="hidden" name="_method" value="delete">
                                                         <button type="button" class="btn btn-inline btn-success btn-sm ladda-button"
-                                                                onclick="showModal({{ $k->id }})" title="edit" name="button"
+                                                                onclick="showModal({{ $j->id }})" title="edit" name="button"
                                                                 data-toggle="modal" data-target="#modaledit"><span
                                                                     class="fa fa-edit"></span></button>
 
@@ -86,19 +82,9 @@
 
                     <div class="modal-body">
                         <div class="form-group row">
-                            <label class="col-sm-3 form-control-label">Nama :</label>
+                            <label class="col-sm-3 form-control-label">Nama Kelas :</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="nama" id="nama">
-                            </div>
-                        </div> <div class="form-group row">
-                            <label class="col-sm-3 form-control-label">Email :</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" name="email" id="email">
-                            </div>
-                        </div> <div class="form-group row">
-                            <label class="col-sm-3 form-control-label">No. Telepon :</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" name="telp" id="telp">
+                                <input type="text" class="form-control" name="kelas" id="kelas">
                             </div>
                         </div>
                         <div class="row form-group">
@@ -129,30 +115,24 @@
             }
         }
         function showModal(id) {
-            document.getElementById('formEdit').action = "/updatedatakontak/"+ id;
+            document.getElementById('formEdit').action = "/updatedatakelas/"+ id;
             console.log("diklik " + id);
-            nama = document.getElementById('nama');
-            email = document.getElementById('email');
-            no_telp = document.getElementById('telp');
+            nama_kelas = document.getElementById('kelas');
             foto = document.getElementById('foto');
             $.ajax({
                 type: 'GET',
-                url: '/detaildatakontak/' + id,
+                url: '/detaildatakelas/' + id,
                 dataType: 'json',
-                success: function (kontak) {
-                    if (kontak[0] !== null) {
-                        console.log('data = ' + kontak);
-                        console.log('datanya 2 = ' + kontak[0].id);
-                        nama.value = kontak[0].nama;
-                        email.value = kontak[0].email;
-                        no_telp.value = kontak[0].no_telp;
-                        foto.value = kontak[0].foto;
+                success: function (kelas) {
+                    if (kelas[0] !== null) {
+                        console.log('data = ' + kelas);
+                        console.log('datanya 2 = ' + kelas[0].id);
+                        nama_kelas.value = kelas[0].nama_kelas;
+                        foto.value = kelas[0].foto;
 
                     } else {
                         console.log('null')
-                        nama.value = "";
-                        email.value = "";
-                        no_telp.value = "";
+                        nama_kelas.value = "";
                         foto.value = "";
                     }
 

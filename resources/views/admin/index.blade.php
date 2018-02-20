@@ -21,15 +21,17 @@
 
     <div class="content mt-3">
 
-        <div class="col-sm-12">
-            <div class="alert  alert-success alert-dismissible fade show" role="alert">
-                <span class="badge badge-pill badge-success">Success</span> You successfully read this important alert
-                message.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        </div>
+        @if (Session::has('sweet_alert.alert'))
+            <script>
+                swal({!! Session::get('sweet_alert.alert') !!});
+            </script>
+        @endif
+
+            @if(Session::has('message'))
+                <div class="alert alert-success">
+                    <p>{{ Session::get('message') }}</p>
+                </div>
+            @endif
 
 
         <div class="col-sm-6 col-lg-3">
