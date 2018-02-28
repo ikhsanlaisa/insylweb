@@ -46,8 +46,16 @@ Route::put('/updatedatalomba/{id}', 'lombaController@update');
 
 Route::delete('/deletedatalomba/{id}', 'lombaController@destroy');
 
-//----------------register----------------//
+//----------------jadwal----------------//
 Route::get('/jadwal', 'jadwalController@index');
+
+Route::get('/tambah_jadwal', 'jadwalController@create');
+
+Route::post('/postjadwal', 'jadwalController@store');
+
+Route::get('/detailjadwal/{id}', 'jadwalController@show');
+
+Route::put('/updatejadwal/{id}', 'jadwalController@update');
 
 //----------------register----------------//
 Route::get('/register', 'adminController@create');

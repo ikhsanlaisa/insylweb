@@ -22,6 +22,6 @@ class tb_jadwal extends Model
     }
 
     public function pertandingan(){
-        return $this->belongsTo('App\tb_pertandingan', 'jadwal_id');
+        return $this->hasMany('App\tb_pertandingan', 'jadwal_id');
     }
 }

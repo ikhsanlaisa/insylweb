@@ -7,8 +7,8 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <a type="submit" href="/tambah_kelas" class="btn" style="border-radius: 20px">
-                                <i class="fa fa-dot-circle-o"></i> Tambah Kelas
+                            <a type="submit" href="/tambah_jadwal" class="btn" style="border-radius: 20px">
+                                <i class="fa fa-dot-circle-o"></i> Tambah Jadwal
                             </a>
                         </div>
                         @if(Session::has('message'))
@@ -22,8 +22,10 @@
                                     <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Foto </th>
-                                        <th>Nama Kelas</th>
+                                        <th>Kelas </th>
+                                        <th>Cabang Olahraga</th>
+                                        <th>Lokasi</th>
+                                        <th>Tanggal Pertandingan</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -32,8 +34,10 @@
                                     @foreach($jadwal as $j)
                                         <tr>
                                             <td><center>{{$i++}}</center></td>
-                                            <td><center><img src="images/kelas/{{ $j->foto }}" class="img-thumbnail" width="100" height="100"/></center></td>
-                                            <td><center>{{$k->nama_kelas}}</center></td>
+                                            <td><center>{{$j->kelas->nama_kelas}} VS {{$j->kelas1->nama_kelas}}</center></td>
+                                            <td><center>{{$j->cb_olahraga->cabang_olahraga}}</center></td>
+                                            <td><center>{{$j->lokasi}}</center></td>
+                                            <td><center>{{$j->date_time}}</center></td>
                                             <td>
                                                 <center>
                                                     <form action="/deletedatakelas/{{$j->id}}" method="post" >
@@ -82,16 +86,50 @@
 
                     <div class="modal-body">
                         <div class="form-group row">
-                            <label class="col-sm-3 form-control-label">Nama Kelas :</label>
+                            <label class="col-sm-3 form-control-label">Nama Kelas 1:</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="kelas" id="kelas">
+                                <select class="form-control" name="tim1" required>
+                                    <option selected disabled>-Pilih Kelas 1-</option>
+                                    @foreach($kelas as $k)
+                                    <option value="{{$k->id}}">{{$k->nama_kelas}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
-                        <div class="row form-group">
-                            <div class="col col-md-3"><label for="file-input" class=" form-control-label">Upload Foto</label></div>
-                            <div class="col-12 col-md-9">
-                                <input type="file" id="file-input" name="foto" id="foto" class="form-control-file" onchange="ValidateSize(this)" accept="image/*">
-                                <small style="color:red">*Max file 200Kb</small>
+                        <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">Nama Kelas 2:</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="tim2" required>
+                                    <option selected disabled>-Pilih Kelas 2-</option>
+                                    @foreach($kelas as $k)
+                                    <option value="{{$k->id}}">{{$k->nama_kelas}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">Cabang Olahraga:</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="lomba" required>
+                                    <option selected disabled>-Pilih Cabang Olahraga-</option>
+                                    @foreach($lomba as $l)
+                                    <option value="{{$l->id}}">{{$l->cabang_olahraga}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">Lokasi :</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="lokasi" name="lokasi"
+                                       placeholder="Lokasi" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">Tanggal Pertandingan :</label>
+                            <div class="col-sm-9">
+                                <input type="datetime-local" id="tgl" name="tgl"
+                                       placeholder="Tanggal Tanding" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -115,25 +153,34 @@
             }
         }
         function showModal(id) {
-            document.getElementById('formEdit').action = "/updatedatakelas/"+ id;
+            document.getElementById('formEdit').action = "/updatejadwal/"+ id;
             console.log("diklik " + id);
-            nama_kelas = document.getElementById('kelas');
-            foto = document.getElementById('foto');
+//            tim1 = document.getElementById('tim1');
+//            tim2 = document.getElementById('tim2');
+//            olahraga_id = document.getElementById('lomba');
+            lokasi = document.getElementById('lokasi');
+            date_time = document.getElementById('tgl');
             $.ajax({
                 type: 'GET',
-                url: '/detaildatakelas/' + id,
+                url: '/detailjadwal/' + id,
                 dataType: 'json',
-                success: function (kelas) {
-                    if (kelas[0] !== null) {
-                        console.log('data = ' + kelas);
-                        console.log('datanya 2 = ' + kelas[0].id);
-                        nama_kelas.value = kelas[0].nama_kelas;
-                        foto.value = kelas[0].foto;
+                success: function (jadwal) {
+                    if (jadwal[0] !== null) {
+                        console.log('data = ' + jadwal);
+                        console.log('datanya 2 = ' + jadwal[0].id);
+                        tim1.value = jadwal[0].tim1;
+                        tim2.value = jadwal[0].tim2;
+                        olahraga_id.value = jadwal[0].olahraga_id;
+                        lokasi.value = jadwal[0].lokasi;
+                        date_time.value = jadwal[0].date_time;
 
                     } else {
                         console.log('null')
-                        nama_kelas.value = "";
-                        foto.value = "";
+                        tim1.value = "";
+                        tim2.value = "";
+                        olahraga_id.value = "";
+                        lokasi.value = "";
+                        date_time.value = "";
                     }
 
                 },

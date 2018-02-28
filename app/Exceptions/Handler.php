@@ -3,7 +3,9 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
@@ -44,10 +46,28 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function render($request, Exception $exception)
     {
+        if ($request->expectsJson()){
+            if ($exception instanceof ValidationException){
+                return response()->json([
+                    'message' => $exception->getMessage(),
+                    'error' => $exception->validator->errors()
+                ], 422);
+            }
+        }
         return parent::render($request, $exception);
+    }
+
+    public function unauthenticated($request, AuthenticationException $exception)
+    {
+        if ($request->expectsJson()){
+            return response()->json([
+                'error' => 'Unauthenticated.'
+            ], 401);
+        }
+        return redirect()->guest(route('login'));
     }
 }
