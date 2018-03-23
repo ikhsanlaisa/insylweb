@@ -13,7 +13,7 @@ class tb_pertandingan extends Model
         return $this->belongsTo('App\tb_jadwal', 'jadwal_id');
     }
 
-    public function kelas(){
-        return $this->belongsTo('App\tb_kelas', 'pemenang_id');
-    }
+//    public function kelas(){
+//        return $this->belongsTo('App\tb_kelas', 'pemenang_id');
+//    }
 }

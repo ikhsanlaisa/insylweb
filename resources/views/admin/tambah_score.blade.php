@@ -4,58 +4,57 @@
     <div class="col-lg-10 centered">
         <div class="card">
             <div class="card-header">
-                <strong>Tambah</strong> Kelas
+                <strong>Tambah</strong> Score
             </div>
             @if(Session::has('message'))
                 <div class="alert alert-success">
                     <p>{{ Session::get('message') }}</p>
                 </div>
             @endif
-            <form action="/postjadwal" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form action="/postscore" id="formEdit" method="post" enctype="multipart/form-data"
+                  class="form-horizontal">
                 {{csrf_field()}}
                 <div class="card-body card-block">
                     <div class="row form-group">
-                        <div class="col col-md-3"><label for="text" class=" form-control-label">Nama Kelas 1</label></div>
+                        <div class="col col-md-3"><label for="text" class=" form-control-label">Jadwal </label></div>
+
                         <div class="col-6 col-md-6">
-                            <select class="form-control" name="tim1" required>
-                                <option selected disabled>-Pilih Kelas 1-</option>
-                                <?php foreach ($kelas as $k) : ?>
-                                <option value="{{$k->id}}">{{$k->nama_kelas}}</option>
-                                <?php endforeach ?>
+                            <select class="form-control" id="jadwal" name="jadwal" required>
+                                <option selected disabled>-Pilih Jadwal-</option>
+                                @foreach($jadwal as $j)
+                                    <option value="{{$j->id}}">{{$j->date_time}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col col-md-3"><label for="text" class=" form-control-label">Nama Kelas 2</label></div>
-                        <div class="col-6 col-md-6">
-                            <select class="form-control" name="tim2" required>
-                                <option selected disabled>-Pilih Kelas 2-</option>
-                                <?php foreach ($kelas as $k) : ?>
-                                <option value="{{$k->id}}">{{$k->nama_kelas}}</option>
-                                <?php endforeach ?>
-                            </select>
+                        <div class="col col-md-3"><label for="text" class=" form-control-label">Keterangan</label></div>
+                        <div class="col-6 col-md-6"><textarea type="text" id="keterangan" name="keterangan"
+                                                              placeholder="Keterangan" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col col-md-3"><label for="text" class=" form-control-label">Cabang Olahraga</label></div>
-                        <div class="col-6 col-md-6"><select class="form-control" name="olahraga_id" required>
-                                <option selected disabled>-Pilih Lomba-</option>
-                                <?php foreach ($lomba as $l) : ?>
-                                <option value="{{$l->id}}">{{$l->cabang_olahraga}}</option>
-                                <?php endforeach ?>
-                            </select>
+                        <div class="col col-md-3"><label for="text" class=" form-control-label">Tim 1</label></div>
+                        <div class="col-6 col-md-6"><input type="text" id="tim1" name="tim1"
+                                                           placeholder="Nama Tim" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="text" class=" form-control-label">Tim 2</label></div>
+                        <div class="col-6 col-md-6"><input type="text" id="tim2" name="tim2"
+                                                           placeholder="Nama Tim" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="text" class=" form-control-label">Score</label></div>
+                        <div class="col-6 col-md-6"><input type="text" id="score" name="score"
+                                                           placeholder="Score" class="form-control">
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text" class=" form-control-label">Lokasi</label></div>
                         <div class="col-6 col-md-6"><input type="text" id="lokasi" name="lokasi"
                                                            placeholder="Lokasi" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col col-md-3"><label for="text" class=" form-control-label">Tanggal Tanding</label></div>
-                        <div class="col-6 col-md-6"><input type="datetime-local" id="tgl" name="tgl"
-                                                           placeholder="Tanggal Tanding" class="form-control">
                         </div>
                     </div>
 
@@ -81,5 +80,48 @@
 
             }
         }
+
+        $('#jadwal').on('change', function (e) {
+            console.log(e);
+            var a = e.target.value;
+            tim1 = document.getElementById('tim1');
+            tim2 = document.getElementById('tim2');
+            lokasi = document.getElementById('lokasi');
+            $.get('/detaildatajadwal/' + a, function (data) {
+//
+                $.ajax({
+                    type: 'GET',
+                    url: '/detaildatajadwal/' + a,
+                    dataType: 'json',
+                    success: function (returnJSON) {
+                        console.log(returnJSON);
+                        if (returnJSON !== null) {
+                            console.log('data = ' + returnJSON);
+                            console.log('datanya 2 = ' + returnJSON.id);
+//                            keterangan.value = jad.keterangan;
+                            tim1.value = returnJSON.tim1.nama_kelas;
+                            tim2.value = returnJSON.tim2.nama_kelas;
+//                            score.value = jad.score;
+                            lokasi.value = returnJSON.jadwal.lokasi;
+
+                        } else {
+                            console.log('null')
+                            keterangan.value = "";
+                            tim1.value = "";
+                            tim2.value = "";
+                            score.value = "";
+                            lokasi.value = "";
+                        }
+
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        console.log("error bro");
+                        console.log(textStatus);
+                        console.log(errorThrown);
+
+                    }
+                });
+            });
+        });
     </script>
 @endsection

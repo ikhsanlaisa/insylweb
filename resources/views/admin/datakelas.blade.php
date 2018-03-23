@@ -127,13 +127,11 @@
                     if (kelas[0] !== null) {
                         console.log('data = ' + kelas);
                         console.log('datanya 2 = ' + kelas[0].id);
-                        nama_kelas.value = kelas[0].nama_kelas;
-                        foto.value = kelas[0].foto;
+                        nama_kelas.value = kelas[0].tim1;
 
                     } else {
                         console.log('null')
                         nama_kelas.value = "";
-                        foto.value = "";
                     }
 
                 },
@@ -146,4 +144,6 @@
             });
         }
     </script>
+
+
 @endsection

@@ -152,12 +152,10 @@
 
             }
         }
+
         function showModal(id) {
             document.getElementById('formEdit').action = "/updatejadwal/"+ id;
             console.log("diklik " + id);
-//            tim1 = document.getElementById('tim1');
-//            tim2 = document.getElementById('tim2');
-//            olahraga_id = document.getElementById('lomba');
             lokasi = document.getElementById('lokasi');
             date_time = document.getElementById('tgl');
             $.ajax({
@@ -168,17 +166,11 @@
                     if (jadwal[0] !== null) {
                         console.log('data = ' + jadwal);
                         console.log('datanya 2 = ' + jadwal[0].id);
-                        tim1.value = jadwal[0].tim1;
-                        tim2.value = jadwal[0].tim2;
-                        olahraga_id.value = jadwal[0].olahraga_id;
                         lokasi.value = jadwal[0].lokasi;
                         date_time.value = jadwal[0].date_time;
 
                     } else {
-                        console.log('null')
-                        tim1.value = "";
-                        tim2.value = "";
-                        olahraga_id.value = "";
+                        console.log('null');
                         lokasi.value = "";
                         date_time.value = "";
                     }
@@ -192,5 +184,6 @@
                 }
             });
         }
+
     </script>
 @endsection

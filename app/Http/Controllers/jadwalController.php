@@ -69,8 +69,11 @@ class jadwalController extends Controller
      */
     public function show($id)
     {
-        $jadwal = tb_jadwal::where('id', $id)->get();
-        return json_encode($jadwal);
+        $jad = tb_jadwal::where('id',$id)->get();
+        return json_encode($jad);
+
+//        $kelas = tb_kelas::where('id', $id)->get();
+//        return json_encode($kelas);
     }
 
     /**

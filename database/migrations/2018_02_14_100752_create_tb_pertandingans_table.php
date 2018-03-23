@@ -22,7 +22,6 @@ class CreateTbPertandingansTable extends Migration
             $table->timestamps();
 
             $table->foreign('jadwal_id')->references('id')->on('tb_jadwals')->onUpdate('cascade')->onUpdate('cascade');
-            $table->foreign('pemenang_id')->references('id')->on('tb_kelas')->onUpdate('cascade')->onUpdate('cascade');
         });
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\tb_jadwal;
 use App\tb_kelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -76,7 +77,7 @@ class kelasController extends Controller
      */
     public function show($id)
     {
-        $kelas = tb_kelas::where('id', $id)->get();
+        $kelas = tb_jadwal::where('id', $id)->get();
         return json_encode($kelas);
     }
 

@@ -7,8 +7,8 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <a type="submit" href="/tambah_lomba" class="btn" style="border-radius: 20px">
-                                <i class="fa fa-dot-circle-o"></i> Tambah Lomba
+                            <a type="submit" href="/tambah_score" class="btn" style="border-radius: 20px">
+                                <i class="fa fa-dot-circle-o"></i> Tambah Score
                             </a>
                         </div>
                         @if(Session::has('message'))
@@ -22,25 +22,31 @@
                                     <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama Lomba</th>
-                                        <th>Penanggung Jawab</th>
+                                        <th>Jadwal</th>
+                                        <th>Kelas</th>
+                                        <th>Score</th>
+                                        <th>Keterangan</th>
+                                        <th>Lokasi</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php $i = 1?>
-                                    @foreach($score as $l)
+                                    @foreach($score as $s)
                                         <tr>
                                             <td>{{$i++}}</td>
-                                            <td>{{$l->cabang_olahraga}}</td>
-                                            <td>{{$l->pj}}</td>
+                                            <td>{{$s->jadwal->date_time}}</td>
+                                            <td>{{$s->tim1}} vs {{$s->tim2}}</td>
+                                            <td>{{$s->score}}</td>
+                                            <td>{{$s->keterangan}}</td>
+                                            <td>{{$s->lokasi}}</td>
                                             <td>
                                                 <center>
-                                                    <form action="/deletedatalomba/{{$l->id}}" method="post" >
+                                                    <form action="/deletedatalomba/{{$s->id}}" method="post" >
                                                         {{csrf_field()}}
                                                         <input type="hidden" name="_method" value="delete">
                                                         <button type="button" class="btn btn-inline btn-success btn-sm ladda-button"
-                                                                onclick="showModal({{ $l->id }})" title="edit" name="button"
+                                                                onclick="showModal({{ $s->id }})" title="edit" name="button"
                                                                 data-toggle="modal" data-target="#modaledit"><span
                                                                     class="fa fa-edit"></span></button>
 
@@ -82,15 +88,33 @@
 
                     <div class="modal-body">
                         <div class="form-group row">
-                            <label class="col-sm-3 form-control-label">Nama Lomba :</label>
+                            <label class="col-sm-3 form-control-label">Jadwal :</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="lomba" id="lomba">
+                                <input type="text" class="form-control" name="Jadwal" id="Jadwal" disabled>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-3 form-control-label">Penanggung Jawab :</label>
+                            <label class="col-sm-3 form-control-label">Kelas :</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="pj" id="pj">
+                                <input type="text" class="form-control" name="kelas" id="kelas" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">Score :</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="score" id="score">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">Keterangan :</label>
+                            <div class="col-sm-9">
+                                <textarea type="text" class="form-control" name="keterangan" id="keterangan"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">Lokasi :</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="lokasi" id="lokasi">
                             </div>
                         </div>
                     </div>
@@ -114,20 +138,23 @@
             }
         }
         function showModal(id) {
-            document.getElementById('formEdit').action = "/updatedatalomba/"+ id;
+            document.getElementById('formEdit').action = "/updatedatascore/"+ id;
             console.log("diklik " + id);
-            cabang_olahraga = document.getElementById('lomba');
-            pj = document.getElementById('pj');
+            jadwal = document.getElementById('jadwal');
+            kelas = document.getElementById('kelas');
+            score = document.getElementById('score');
+            keterangan = document.getElementById('keterangan');
+            lokasi = document.getElementById('lokasi');
             $.ajax({
                 type: 'GET',
-                url: '/detaildatalomba/' + id,
+                url: '/detailjadwal/' + id,
                 dataType: 'json',
-                success: function (lomba) {
-                    if (lomba[0] !== null) {
-                        console.log('data = ' + lomba);
-                        console.log('datanya 2 = ' + lomba[0].id);
-                        cabang_olahraga.value = lomba[0].cabang_olahraga;
-                        pj.value = lomba[0].pj;
+                success: function (sc) {
+                    if (sc[0] !== null) {
+                        console.log('data = ' + sc[0]);
+                        console.log('datanya 2 = ' + sc[0].id);
+//                        jadwal.value = jadwal[0].jadwal_id;
+//                        pj.value = jadwal[0].pj;
 
                     } else {
                         console.log('null')

@@ -62,7 +62,7 @@ Route::get('/register', 'adminController@create');
 
 Route::post('/postregister', 'adminController@store');
 
-//----------------datakelas----------------//
+//----------------datakontak----------------//
 Route::get('/datakontak', 'kontakController@index');
 
 Route::get('/tambah_kontak', 'kontakController@create');
@@ -88,3 +88,13 @@ Route::delete('/deletedatakelas/{id}', 'kelasController@destroy');
 
 //----------------datascore---------------//
 Route::get('/datascore', 'ScoreController@index');
+
+Route::get('/tambah_score', 'ScoreController@create');
+
+Route::get('/detaildatajadwal/{id}', 'ScoreController@show');
+
+Route::post('/postscore', 'ScoreController@store');
+
+Route::get('/detailjadwal/{id}', 'ScoreController@shows');
+
+Route::put('/updatedatajadwal/{id}', 'ScoreController@update');
