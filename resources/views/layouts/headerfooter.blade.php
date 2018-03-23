@@ -78,7 +78,7 @@
                 </li>
 
                 <li class="active">
-                    <a href="/kontak"> <i class="menu-icon fa fa-sitemap"></i>Score dan Klasemen</a>
+                    <a href="/datascore"> <i class="menu-icon fa fa-sitemap"></i>Score dan Klasemen</a>
                 </li>
 
                 {{--<li class="active">--}}
@@ -184,8 +184,7 @@
 
             <div class="col-sm-5">
                 <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                    @csrf
-
+                    {{csrf_field()}}
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                            aria-expanded="false">

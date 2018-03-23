@@ -85,3 +85,6 @@ Route::get('/detaildatakelas/{id}', 'kelasController@show');
 Route::put('/updatedatakelas/{id}', 'kelasController@update');
 
 Route::delete('/deletedatakelas/{id}', 'kelasController@destroy');
+
+//----------------datascore---------------//
+Route::get('/datascore', 'ScoreController@index');

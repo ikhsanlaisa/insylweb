@@ -18,22 +18,22 @@ class ApiRegisterController extends Controller
 {
     public function register(Request $request)
     {
-        $credentials = $request->only('nama', 'email', 'password', 'roles');
+        $credentials = $request->only('name', 'email', 'password', 'roles');
 
         $rules = [
-            'nama' => 'required|max:255',
+            'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users'
         ];
         $validator = Validator::make($credentials, $rules);
         if ($validator->fails()) {
             return response()->json(['success' => false, 'error' => $validator->messages()]);
         }
-        $name = $request->nama;
+        $name = $request->name;
         $email = $request->email;
         $password = $request->password;
-        $roles = $request->roles;
+        $roles = $request->roles = 2;
 
-        $user = User::create(['nama' => $name, 'email' => $email, 'roles' => $roles, 'password' => Hash::make($password)]);
+        $user = User::create(['name' => $name, 'email' => $email, 'roles' => $roles, 'password' => Hash::make($password)]);
         $verification_code = str_random(30); //Generate verification code
         DB::table('user_verifications')->insert(['user_id' => $user->id, 'token' => $verification_code]);
 //        $subject = "Please verify your email address.";
