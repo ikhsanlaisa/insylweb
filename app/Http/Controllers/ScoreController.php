@@ -62,4 +62,14 @@ class ScoreController extends Controller
         $sc = tb_pertandingan::find($id);
         return json_encode($sc);
     }
+
+    public function destroy($id){
+        $score = tb_pertandingan::find($id);
+        $result = $score->delete();
+        if ($result){
+            return redirect('/datascore')->with(['message' => 'Berhasil Hapus Score']);
+        }
+        return redirect('/datascore')->with(['message' => 'Gagal Hapus Score']);
+    }
+
 }

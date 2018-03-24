@@ -121,6 +121,11 @@ class kontakController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kontak = tb_kontak::find($id);
+        $result = $kontak->delete();
+        if ($result){
+            return redirect('/datakontak')->with(['message' => 'Berhasil Hapus Kontak']);
+        }
+        return redirect('/datakontak')->with(['message' => 'Gagal Hapus Kontak']);
     }
 }

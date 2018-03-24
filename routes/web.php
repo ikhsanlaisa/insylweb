@@ -57,6 +57,8 @@ Route::get('/detailjadwal/{id}', 'jadwalController@show');
 
 Route::put('/updatejadwal/{id}', 'jadwalController@update');
 
+Route::delete('/deletedatajadwal/{id}', 'jadwalController@destroy');
+
 //----------------register----------------//
 Route::get('/register', 'adminController@create');
 
@@ -72,6 +74,8 @@ Route::post('/postkontak', 'kontakController@store');
 Route::get('/detaildatakontak/{id}', 'kontakController@show');
 
 Route::put('/updatedatakontak/{id}', 'kontakController@update');
+
+Route::delete('/deletekontak/{id}', 'kontakController@destroy');
 
 //----------------datakelas----------------//
 Route::get('/datakelas', 'kelasController@index');
@@ -98,3 +102,5 @@ Route::post('/postscore', 'ScoreController@store');
 Route::get('/detailjadwal/{id}', 'ScoreController@shows');
 
 Route::put('/updatedatajadwal/{id}', 'ScoreController@update');
+
+Route::delete('/deletescore/{id}', 'ScoreController@destroy');

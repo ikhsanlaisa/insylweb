@@ -21,7 +21,7 @@ class CreateTbPertandingansTable extends Migration
             $table->string('foto');
             $table->timestamps();
 
-            $table->foreign('jadwal_id')->references('id')->on('tb_jadwals')->onUpdate('cascade')->onUpdate('cascade');
+            $table->foreign('jadwal_id')->references('id')->on('tb_jadwals')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

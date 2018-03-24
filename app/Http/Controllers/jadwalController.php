@@ -128,6 +128,11 @@ class jadwalController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $jadwal = tb_jadwal::find($id);
+        $result = $jadwal->delete();
+        if ($result){
+            return redirect('/jadwal')->with(['message' => 'Berhasil Hapus Jadwal']);
+        }
+        return redirect('/jadwal')->with(['message' => 'Gagal Hapus Jadwal']);
     }
 }

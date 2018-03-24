@@ -42,7 +42,7 @@
                                             <td>{{$s->lokasi}}</td>
                                             <td>
                                                 <center>
-                                                    <form action="/deletedatalomba/{{$s->id}}" method="post" >
+                                                    <form action="/deletescore/{{$s->id}}" method="post" >
                                                         {{csrf_field()}}
                                                         <input type="hidden" name="_method" value="delete">
                                                         <button type="button" class="btn btn-inline btn-success btn-sm ladda-button"

@@ -40,7 +40,7 @@
                                             <td><center>{{$k->no_telp}}</center></td>
                                             <td>
                                                 <center>
-                                                    <form action="/deletedatakelas/{{$k->id}}" method="post" >
+                                                    <form action="/deletekontak/{{$k->id}}" method="post" >
                                                         {{csrf_field()}}
                                                         <input type="hidden" name="_method" value="delete">
                                                         <button type="button" class="btn btn-inline btn-success btn-sm ladda-button"

@@ -40,7 +40,7 @@
                                             <td><center>{{$j->date_time}}</center></td>
                                             <td>
                                                 <center>
-                                                    <form action="/deletedatakelas/{{$j->id}}" method="post" >
+                                                    <form action="/deletedatajadwal/{{$j->id}}" method="post" >
                                                         {{csrf_field()}}
                                                         <input type="hidden" name="_method" value="delete">
                                                         <button type="button" class="btn btn-inline btn-success btn-sm ladda-button"
