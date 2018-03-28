@@ -34,6 +34,12 @@
                         </div>
                     </div>
                     <div class="row form-group">
+                        <div class="col col-md-3"><label for="text" class=" form-control-label">Cabang Olahraga</label></div>
+                        <div class="col-6 col-md-6"><input type="text" id="cabor" name="cabor"
+                                                           placeholder="Nama Tim" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
                         <div class="col col-md-3"><label for="text" class=" form-control-label">Tim 1</label></div>
                         <div class="col-6 col-md-6"><input type="text" id="tim1" name="tim1"
                                                            placeholder="Nama Tim" class="form-control">
@@ -84,6 +90,7 @@
         $('#jadwal').on('change', function (e) {
             console.log(e);
             var a = e.target.value;
+            cabor = document.getElementById('cabor');
             tim1 = document.getElementById('tim1');
             tim2 = document.getElementById('tim2');
             lokasi = document.getElementById('lokasi');
@@ -99,6 +106,7 @@
                             console.log('data = ' + returnJSON);
                             console.log('datanya 2 = ' + returnJSON.id);
 //                            keterangan.value = jad.keterangan;
+                            cabor.value = returnJSON.cabor.cabang_olahraga;
                             tim1.value = returnJSON.tim1.nama_kelas;
                             tim2.value = returnJSON.tim2.nama_kelas;
 //                            score.value = jad.score;

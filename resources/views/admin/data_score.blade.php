@@ -23,6 +23,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Jadwal</th>
+                                        <th>Cabor</th>
                                         <th>Kelas</th>
                                         <th>Score</th>
                                         <th>Keterangan</th>
@@ -36,6 +37,7 @@
                                         <tr>
                                             <td>{{$i++}}</td>
                                             <td>{{$s->jadwal->date_time}}</td>
+                                            <td>{{$s->cabor}}</td>
                                             <td>{{$s->tim1}} vs {{$s->tim2}}</td>
                                             <td>{{$s->score}}</td>
                                             <td>{{$s->keterangan}}</td>
@@ -94,6 +96,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">Cabang Olahraga :</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="cabor" id="cabor" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-sm-3 form-control-label">Kelas :</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" name="kelas" id="kelas" disabled>
@@ -114,7 +122,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 form-control-label">Lokasi :</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="lokasi" id="lokasi">
+                                <input type="text" class="form-control" name="lokasi" id="lokasi" disabled>
                             </div>
                         </div>
                     </div>

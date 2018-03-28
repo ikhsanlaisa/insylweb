@@ -32,11 +32,13 @@ class ScoreController extends Controller
         $jad = tb_jadwal::find($id);
         $tim1 = $jad->kelas()->first();
         $tim2 = $jad->kelas1()->first();
+        $cabor = $jad->cb_olahraga()->first();
 
         $returnJSON = [
             "jadwal"=>$jad,
             "tim1"=>$tim1,
-            "tim2"=>$tim2
+            "tim2"=>$tim2,
+            "cabor"=>$cabor
         ];
 
         return json_encode($returnJSON);
@@ -45,6 +47,7 @@ class ScoreController extends Controller
     public function store(Request $request){
         $score = new tb_pertandingan();
         $score->jadwal_id = $request->input('jadwal');
+        $score->cabor = $request->input('cabor');
         $score->tim1 = $request->input('tim1');
         $score->tim2 = $request->input('tim2');
         $score->keterangan = $request->input('keterangan');

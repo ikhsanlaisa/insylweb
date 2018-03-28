@@ -17,8 +17,10 @@ class CreateTbPertandingansTable extends Migration
             $table->increments('id');
             $table->integer('jadwal_id')->unsigned();
             $table->string('keterangan');
-            $table->integer('pemenang_id')->unsigned();
-            $table->string('foto');
+            $table->integer('tim1');
+            $table->integer('tim2');
+            $table->string('score');
+            $table->string('lokasi');
             $table->timestamps();
 
             $table->foreign('jadwal_id')->references('id')->on('tb_jadwals')->onDelete('cascade')->onUpdate('cascade');
