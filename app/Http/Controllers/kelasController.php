@@ -77,7 +77,7 @@ class kelasController extends Controller
      */
     public function show($id)
     {
-        $kelas = tb_jadwal::where('id', $id)->get();
+        $kelas = tb_kelas::find($id);
         return json_encode($kelas);
     }
 

@@ -146,7 +146,7 @@
                         nama.value = kontak[0].nama;
                         email.value = kontak[0].email;
                         no_telp.value = kontak[0].no_telp;
-                        foto.value = kontak[0].foto;
+//                        foto.value = kontak[0].foto;
 
                     } else {
                         console.log('null')

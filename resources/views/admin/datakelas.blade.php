@@ -123,11 +123,11 @@
                 type: 'GET',
                 url: '/detaildatakelas/' + id,
                 dataType: 'json',
-                success: function (kelas) {
-                    if (kelas[0] !== null) {
-                        console.log('data = ' + kelas);
-                        console.log('datanya 2 = ' + kelas[0].id);
-                        nama_kelas.value = kelas[0].tim1;
+                success: function (data) {
+                    if (data !== null) {
+                        console.log(data);
+                        console.log('datanya 2 = ' + data.id);
+                        nama_kelas.value = data.nama_kelas;
 
                     } else {
                         console.log('null')

@@ -99,8 +99,8 @@ Route::get('/detaildatajadwal/{id}', 'ScoreController@show');
 
 Route::post('/postscore', 'ScoreController@store');
 
-Route::get('/detailjadwal/{id}', 'ScoreController@shows');
+Route::get('/detailscore/{id}', 'ScoreController@shows');
 
-Route::put('/updatedatajadwal/{id}', 'ScoreController@update');
+Route::put('/updatedatascore/{id}', 'ScoreController@update');
 
 Route::delete('/deletescore/{id}', 'ScoreController@destroy');

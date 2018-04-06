@@ -62,8 +62,25 @@ class ScoreController extends Controller
     }
 
     public function shows($id){
+        $scr = tb_pertandingan::find($id);
+        $jad = $scr->jadwal()->first();
+        $data = [
+            "scr" => $scr,
+            "jad" => $jad
+        ];
+        return json_encode($data);
+    }
+
+    public function update(Request $request, $id){
         $sc = tb_pertandingan::find($id);
-        return json_encode($sc);
+        $sc->score = $request->input('score');
+        $sc->keterangan = $request->input('keterangan');
+        $result = $sc->save();
+        if ($result){
+            return redirect('/tambah_score')->with(['message' => 'Berhasil Hapus Score']);
+        }else{
+            return redirect('/tambah_score')->with(['message' => 'Gagal Hapus Score']);
+        }
     }
 
     public function destroy($id){

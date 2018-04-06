@@ -92,7 +92,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 form-control-label">Jadwal :</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="Jadwal" id="Jadwal" disabled>
+                                <input type="text" class="form-control" name="jadwal" id="jadwal" disabled>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -149,20 +149,25 @@
             document.getElementById('formEdit').action = "/updatedatascore/"+ id;
             console.log("diklik " + id);
             jadwal = document.getElementById('jadwal');
+            cabor = document.getElementById('cabor');
             kelas = document.getElementById('kelas');
             score = document.getElementById('score');
             keterangan = document.getElementById('keterangan');
             lokasi = document.getElementById('lokasi');
             $.ajax({
                 type: 'GET',
-                url: '/detailjadwal/' + id,
+                url: '/detailscore/' + id,
                 dataType: 'json',
-                success: function (sc) {
-                    if (sc[0] !== null) {
-                        console.log('data = ' + sc[0]);
-                        console.log('datanya 2 = ' + sc[0].id);
-//                        jadwal.value = jadwal[0].jadwal_id;
-//                        pj.value = jadwal[0].pj;
+                success: function (data) {
+                    if (data !== null) {
+                        console.log(data);
+                        console.log('datanya 2 = ' + data.scr.id);
+                        jadwal.value = data.jad.date_time;
+                        kelas.value = data.scr.tim1 + " vs " + data.scr.tim2;
+                        cabor.value = data.scr.cabor;
+                        score.value = data.scr.score;
+                        keterangan.value = data.scr.keterangan;
+                        lokasi.value = data.scr.lokasi;
 
                     } else {
                         console.log('null')
