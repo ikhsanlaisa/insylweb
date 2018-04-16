@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Route;
 
 class ApiUserController extends Controller
 {
-    private $client;
-    public $successStatus=200;
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +20,7 @@ class ApiUserController extends Controller
 
     public function __construct()
     {
-        $this->client = Client::find(2);
+        $this->middleware('jwt.auth');
     }
 
     public function index()

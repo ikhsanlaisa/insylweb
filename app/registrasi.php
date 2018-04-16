@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class registrasi extends Model
 {
     protected $table = 'registrasis';
-    protected $fillable = array('profil_id', 'olahraga_id', 'file');
+    protected $fillable = array('profil_id', 'olahraga_id');
 
     public function profil(){
         return $this->belongsTo('App\User', 'profil_id');
