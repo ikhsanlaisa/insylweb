@@ -19,8 +19,6 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/recover', 'ApiLoginController@recover');
     Route::get('/score', 'ApiScoreController@score');
     Route::get('/kontak', 'ApiKontakController@kontak');
-    Route::get('/user', 'ApiScoreController@index');
+    Route::get('/user', 'ApiUsersController@index');
     Route::post('/regis', 'ApiScoreController@regis');
-//    Route::get('user', 'ApiUserController@index');
-//    Route::post('/logout', 'ApiLoginController@logout');
 });
